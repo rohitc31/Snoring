@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 
 	private View mainView;
 	private Button mSleepRecordBtn, mAlarmBtn, mRecordBtn, mTestBtn;
-	private TextView txtAbs;
+	private TextView txtAbs,txtvw;
 
 	private Toast mToast;
 
@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
 		mRecordBtn = (Button) findViewById(R.id.btnRecordAlarm);
 		mTestBtn = (Button) findViewById(R.id.btnAlarmTest);
 		txtAbs = (TextView) findViewById(R.id.txtaverageAbsValue);
+		txtvw = (TextView) findViewById(R.id.textView2);
 		sfv = (SurfaceView) this.findViewById(R.id.SurfaceView);
 
 		intent = new Intent(MainActivity.this, AlarmReceiverActivity.class);
@@ -147,6 +148,13 @@ public class MainActivity extends Activity {
 				startOneShoot();
 			}
 		});
+		txtvw.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+
+				txtvw = (TextView) findViewById(R.id.textView2);
+				txtvw.setText("Level is Above Threshold");
+			}
+		});
 
 	}
 
@@ -160,6 +168,7 @@ public class MainActivity extends Activity {
 
 	public void startOneShoot() {
 		int i = 5;
+		txtvw.setText("Level is Above Threshold");
 		am.set(AlarmManager.RTC_WAKEUP,
 				System.currentTimeMillis() + (i * 1000), pendingIntent);
 	}
